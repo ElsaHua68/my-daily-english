@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Daily English</title>
+<style>
+body {
+  font-family: -apple-system, sans-serif;
+  background: #f5f7fc;
+  color: #25334b;
+  margin: 0;
+  padding: 24px;
+}
+main { max-width: 500px; margin: auto; }
+h1 { color: #4466a9; }
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: 0 3px 12px #00000010;
+}
+button {
+  background: #4466a9;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 17px;
+  margin-top: 12px;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>My Daily English</h1>
+<p>每天15分鐘，輕鬆開口說英文</p>
+<div class="card">
+<h2>Day 01｜日常打招呼</h2>
+<p>自然發音 × 生活英文</p>
+<h2>Hello!</h2>
+<p>你好！</p>
+<button onclick="speak()">🔊 聽英文發音</button>
+</div>
+</main>
+<script>
+function speak() {
+  speechSynthesis.cancel();
+  const msg = new SpeechSynthesisUtterance("Hello!");
+  msg.lang = "en-US";
+  msg.rate = 0.85;
+  speechSynthesis.speak(msg);
+}
+</script>
+</body>
+</html>
