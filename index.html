@@ -1,41 +1,106 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Daily English</title>
 <style>
-body{font-family:-apple-system,sans-serif;background:#f5f7fc;color:#25334b;margin:0;padding:24px}
-main{max-width:500px;margin:auto}
-h1{color:#4466a9}
-.card{background:white;border-radius:18px;padding:24px;margin-top:20px;box-shadow:0 3px 12px #00000010}
-audio{width:100%;margin:12px 0 20px}
-small{color:#667}
+body {
+  font-family: -apple-system, sans-serif;
+  background: #f5f7fc;
+  color: #25334b;
+  margin: 0;
+  padding: 20px;
+}
+main { max-width: 500px; margin: auto; }
+h1 { color: #4466a9; }
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.lesson {
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+}
+button {
+  background: #4466a9;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-top: 8px;
+  font-size: 16px;
+}
+select { padding: 8px; font-size: 16px; }
 </style>
 </head>
 <body>
 <main>
 <h1>My Daily English</h1>
 <p>每天15分鐘，輕鬆開口說英文</p>
+
+<label for="speed">英文朗讀速度：</label>
+<select id="speed">
+  <option value="0.7">慢速</option>
+  <option value="0.85" selected>一般練習</option>
+  <option value="1">正常速度</option>
+</select>
+
 <div class="card">
 <h2>Day 01｜日常打招呼</h2>
-<p>Hello!｜你好！</p>
-<audio controls preload="none" src="https://dict.youdao.com/dictvoice?audio=Hello%21&type=2"></audio>
+<div class="lesson">
+  <strong>Hello!</strong>
+  <p>你好！</p>
+  <button onclick="speak('Hello!')">▶ 聽發音</button>
 </div>
+</div>
+
 <div class="card">
 <h2>Day 02｜自我介紹</h2>
-<p>1. Hello!｜你好！</p>
-<audio controls preload="none" src="https://dict.youdao.com/dictvoice?audio=Hello%21&type=2"></audio>
-<p>2. My name is Elsa.｜我的名字是 Elsa。</p>
-<audio controls preload="none" src="https://dict.youdao.com/dictvoice?audio=My%20name%20is%20Elsa.&type=2"></audio>
-<p>3. Nice to meet you.｜很高興認識你。</p>
-<audio controls preload="none" src="https://dict.youdao.com/dictvoice?audio=Nice%20to%20meet%20you.&type=2"></audio>
-<p>4. How are you?｜你好嗎？</p>
-<audio controls preload="none" src="https://dict.youdao.com/dictvoice?audio=How%20are%20you%3F&type=2"></audio>
-<p>5. I'm fine, thank you.｜我很好，謝謝。</p>
-<audio controls preload="none" src="https://dict.youdao.com/dictvoice?audio=I%27m%20fine%2C%20thank%20you.&type=2"></audio>
-<small>按下每句下方的 ▶ 播放英文，跟著練習三次。</small>
+<div class="lesson">
+  <strong>1. Hello!</strong>
+  <p>你好！</p>
+  <button onclick="speak('Hello!')">▶ 聽發音</button>
+</div>
+<div class="lesson">
+  <strong>2. My name is Elsa.</strong>
+  <p>我的名字是 Elsa。</p>
+  <button onclick="speak('My name is Elsa.')">▶ 聽發音</button>
+</div>
+<div class="lesson">
+  <strong>3. Nice to meet you.</strong>
+  <p>很高興認識你。</p>
+  <button onclick="speak('Nice to meet you.')">▶ 聽發音</button>
+</div>
+<div class="lesson">
+  <strong>4. How are you?</strong>
+  <p>你好嗎？</p>
+  <button onclick="speak('How are you?')">▶ 聽發音</button>
+</div>
+<div class="lesson">
+  <strong>5. I'm fine, thank you.</strong>
+  <p>我很好，謝謝。</p>
+  <button onclick="speak('I am fine, thank you.')">▶ 聽發音</button>
+</div>
+<p>每句聽三次，再跟著開口練習。</p>
 </div>
 </main>
+
+<script>
+function speak(sentence) {
+  if (!('speechSynthesis' in window)) {
+    alert('目前瀏覽器不支援英文朗讀');
+    return;
+  }
+  speechSynthesis.cancel();
+  const voice = new SpeechSynthesisUtterance(sentence);
+  voice.lang = 'en-US';
+  voice.rate = Number(document.getElementById('speed').value);
+  speechSynthesis.speak(voice);
+}
+</script>
 </body>
 </html>
